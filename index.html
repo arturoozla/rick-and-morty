@@ -1,76 +1,81 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proyecto 2ndo Parcial</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SEGUNDO PARCIAL</title>
+    <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
     <header class="shadow">
         <div class="container-logo">
-            <img src="images.png" alt="Un logo de la pagina"> 
+           <img src="images.png" alt="Logo de la página">
         </div>
-        <div>
-            <button id="dark-mode">Dark Mode</button>
+        <div class="titulo">
+            
         </div>
+        <button id="Dark-mode">Dark mode</button>
     </header>
+
     <section class="container-title">
-        <h1> The Rick And Morty</h1>
+        <h1>The Rick and Morty</h1>
     </section>
 
-    <section class="personaje" id="container-personajes">
+    <section id="container-personajes">
     </section>
-    <button id="load-more">Cargar mas personajes</button>
-   
-</body>
-<script>
-    function renderLoader (){
-        const container= document.getElementById('container-personajes')
-        const loader= document.createElement('div')
-        loader.setAttribute('id', 'loader')
-        loader.innerHTML='cargando...'
-        container.appendChild(loader)
-    }
-    async function get_personajes(){
-        const url='https://rickandmortyapi.com/api/character';
-        renderLoader()
-        const response=await fetch(url)
-        const data= await response.json()
-        const container= document.getElementById("container-personajes")
-        const personajes= data.results
-        personajes.forEach(element => {
-            console.log(element);
-            const container_personaje = document.createElement("div")
-            container_personaje.classList.add("personaje")
-            const img = document.createElement("img")
-            img.src = element.image
-            container_personaje.appendChild(img)
-            container.appendChild(container_personaje)   
-        });
-        removeLoader()
-        } 
-    
-
-    get_personajes();
-    const btn = document.getElementById("load-more")
-    function loadMore(){
-        console.log("Cargar mas personajes");
-    }
-    btn.addEventListener("click", loadMore )
-
-    const btnDarkMode = document.getElementById("dark-mode")
-    function toggleDarkMode(){
-        document.body.classList.toggle("dark-mode");
-        if (document.body.classList.contains("dark-mode")){
-            btnDarkMode.textContent= "White-Mode";
-        } else {
-            btnDarkMode.textContent= "dark-mode"
+    <button id="loard-more">Cargar mas personajes</button>
+    </body>
+    <script>
+        function renderLoader(){
+            const container= document.getElementById('container-personajes')
+            const loader = document.createElement('div')
+            loader.setAttribute('id','loader')
+            loader.innerHTML = 'cargando...'
+            container.appendChild(loader)
         }
-    }
-    btnDarkMode.addEventListener("click", toggleDarkMode)
+        function removeLoader(){
+            const loader = document.getElementById('loader')
+            if(loader){
+                loader.remove()
+            }
+        }
+        async function get_personajes() {
+            const url = 'https://rickandmortyapi.com/api/character';
+            renderLoader()
+            const response = await fetch(url);
+            const data = await response.json();
+            const container = document.getElementById('container-personajes');
+            const personajes = data.results;
+            personajes.forEach(element => {
+                const container_personaje = document.createElement('div');
+                container_personaje.classList.add('personaje');
+                const img = document.createElement('img');
+                img.src = element.image;
+                container_personaje.appendChild(img);
+                container.appendChild(container_personaje);
+            });
+            removeLoader()
+        }
 
+        get_personajes();
 
-</script>
-</section>
+        const btn = document.getElementById("loard-more");
+        function loardmore() {
+            console.log("cargar mas personajes");
+        }
+        btn.addEventListener("click", loardmore);
+
+        const btnDarkMode = document.getElementById("Dark-mode");
+        function toggleDarkMore() {
+            document.body.classList.toggle("Dark-mode");
+            if (document.body.classList.contains("Dark-mode")) {
+                btnDarkMode.textContent = "White mode";
+            } else {
+                btnDarkMode.textContent = "Dark mode";
+            }
+        }
+        btnDarkMode.addEventListener("click", toggleDarkMore);
+    </script>
+</body>
 </html>
